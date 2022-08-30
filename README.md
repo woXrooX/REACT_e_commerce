@@ -1,1 +1,3 @@
-# RECT_E_COMMERCE
+# E-Commerce App
+
+React training 2022
