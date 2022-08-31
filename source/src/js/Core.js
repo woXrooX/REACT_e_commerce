@@ -18,14 +18,16 @@ export default class Core extends React.Component{
     return(
       <BrowserRouter>
         <Header />
-        <Routes>
-          <Route path="/" element={<All />} />
-          <Route path="/all" element={<All />} />
-          <Route path="/tech" element={<Tech />} />
-          <Route path="/clothes" element={<Clothes />} />
-          <Route path="/Cart" element={<Cart />} />
-          <Route path="/Product" element={<Product />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<All />} />
+            <Route path="/all" element={<All />} />
+            <Route path="/tech" element={<Tech />} />
+            <Route path="/clothes" element={<Clothes />} />
+            <Route path="/Cart" element={<Cart />} />
+            <Route path="/Product" element={<Product />} />
+          </Routes>
+        </main>
       </BrowserRouter>
     );
   }

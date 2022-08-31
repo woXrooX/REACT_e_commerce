@@ -1,4 +1,12 @@
 :root{
+  --color-background: rgba(255, 255, 255, 1);
+  --color-shadow: rgba(0, 0, 0, 0.5);
+
+  --shadow-box: 0px 0px 0px 0px var(--color-shadow);
+
+  --padding: 0px;
+
+  --header-height: 80px;
 
 }
 
@@ -6,7 +14,31 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  outline:none;
+  text-decoration:none;
+
 }
 
 body{
+  background-color: var(--color-background);
+
 }
+
+/* header START */
+body > div#root > header{
+  height: var(--header-height);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+
+}
+body > div#root > header > nav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+body > div#root > header > nav > a{}
+body > div#root > header > nav > a.active{}
+/* header END */
