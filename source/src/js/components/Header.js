@@ -1,16 +1,21 @@
 import React from 'react';
 
-import Nav from './Nav';
-import CurrencySwitcher from './CurrencySwitcher';
-import CartOverlay from './CartOverlay';
+import Nav from 'js/components/Nav';
+import CurrencySwitcher from 'js/components/CurrencySwitcher';
+import CartOverlay from 'js/components/CartOverlay';
+
+import brand from 'svg/brand.svg';
 
 export default class Header extends React.Component{
   render(){
     return(
         <header>
           <Nav />
-          <CurrencySwitcher />
-          <CartOverlay />
+          <img src={brand} alt="Brand" />
+          <section>
+            <CurrencySwitcher />
+            <CartOverlay />
+          </section>
         </header>
     );
   }

@@ -1,30 +1,30 @@
 :root{
   --color-background: rgba(255, 255, 255, 1);
-  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-nav-a: #1D1F22;
+  --color-nav-a-active: #5ECE7B;
 
-  --shadow-box: 0px 0px 0px 0px var(--color-shadow);
+  --shadow-box: 0px 0px 20px -10px var(--color-shadow);
 
-  --padding: 0px;
+  --padding: 20px;
+  --gap: 20px;
+  --radius: 0px;
 
   --header-height: 80px;
 
-}
-
-*{
-  padding: 0px;
-  margin: 0px;
-  box-sizing: border-box;
-  outline:none;
-  text-decoration:none;
+  --transition-velocity: 200ms;
+  /* ttf = transition-timing-function */
+  --ttf: ease-in-out;
 
 }
 
 body{
   background-color: var(--color-background);
 
-}
+  font-size: 16px;
+  font-family: 'Raleway';
 
-/* header START */
+}
 body > div#root > header{
   height: var(--header-height);
 
@@ -37,8 +37,82 @@ body > div#root > header > nav{
   display: flex;
   flex-direction: row;
   align-items: center;
-  
+
 }
-body > div#root > header > nav > a{}
-body > div#root > header > nav > a.active{}
-/* header END */
+body > div#root > header > nav > a{
+  color: var(--color-nav-a);
+  text-transform: uppercase;
+  font-weight: 400;
+
+  padding: 30px 16px;
+  border-block-end: transparent solid 2px;
+
+}
+body > div#root > header > nav > a:hover{
+  color: var(--color-nav-a-active);
+  font-weight: 600;
+
+}
+body > div#root > header > nav > a.active{
+  color: var(--color-nav-a-active);
+  font-weight: 600;
+
+  border-block-end-color: currentcolor;
+
+}
+body > div#root > header > section{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: var(--gap);
+
+}
+body > div#root > header > section > currency-switcher{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+
+}
+body > div#root > header > section > currency-switcher > img{
+  height: 0.3em;
+
+}
+body > div#root > header > section > currency-switcher > currencies-pop{
+  opacity: 0;
+  box-shadow: var(--shadow-box);
+
+  padding: var(--padding) 0px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  top: calc(var(--header-height) - 1.5em);
+  transform: translate(-0.6em, -10px);
+
+  transition: var(--transition-velocity) var(--ttf);
+  transition-property: transform, opacity;
+
+}
+body > div#root > header > section > currency-switcher > currencies-pop.active{
+  opacity: 1;
+
+    transform: translate(-0.6em, 0px);
+
+}
+body > div#root > header > section > currency-switcher > currencies-pop > button{
+  font-size: 1em;
+  height: 45px;
+  padding: 0px var(--padding);
+
+  transition: var(--transition-velocity) var(--ttf) background-color;
+
+}
+body > div#root > header > section > currency-switcher > currencies-pop > button:hover{
+  background-color: #EEEEEE;
+
+}
+body > div#root > header > section > currency-switcher > currencies-pop > button.active{
+
+}

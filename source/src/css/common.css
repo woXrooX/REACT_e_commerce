@@ -1,0 +1,23 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+
+}
+
+button{
+  background-color: unset;
+  border: unset;
+  cursor: pointer;
+
+}
+
+/***************** Fonts START */
+/* Raleway */
+@font-face{
+  font-family: Raleway;
+  src:url("fonts/Raleway.ttf");
+}
+/***************** Fonts END */

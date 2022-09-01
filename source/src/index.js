@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './css/master.css';
+import 'css/common.css';
+import 'css/master.css';
 
-import Core from './js/Core';
+import Core from 'js/Core';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
