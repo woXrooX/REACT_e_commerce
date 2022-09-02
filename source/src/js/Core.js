@@ -31,7 +31,7 @@ export default class Core extends React.Component{
       <BrowserRouter>
         <Header
           setCurrentCurrency={this.setCurrentCurrency}
-          getCurrentCurrency={this.getCurrentCurrency}
+          getCurrentCurrency={this.#getCurrentCurrency}
         />
         <main>
           <Routes>
@@ -53,7 +53,7 @@ export default class Core extends React.Component{
 
   /// Getters
   // getCurrentCurrency = ()=> this.state.currentCurrency;
-  get getCurrentCurrency(){return this.state.currentCurrency;}
+  get #getCurrentCurrency(){return this.state.currentCurrency;}
 
 
 }
