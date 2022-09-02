@@ -1,4 +1,9 @@
 :root{
+  --z-minus: -1;
+  --z-cover: 1;
+  --z-header: 2;
+  --z-pop-ups: 3;
+
   --color-background: rgba(255, 255, 255, 1);
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-nav-a: #1D1F22;
@@ -77,6 +82,8 @@ body > div#root > header > section > currency-switcher{
 body > div#root > header > section > currency-switcher > img{
   height: 0.5em;
 
+  cursor: pointer;
+
   transition:var(--transition-velocity) var(--ttf);
   transition-property: transform;
 
@@ -85,7 +92,7 @@ body > div#root > header > section > currency-switcher > img.active{
   transform: rotate(180deg);
 
 }
-body > div#root > header > section > currency-switcher > currencies-pop{
+body > div#root > header > section > currency-switcher > currencies-pop-up{
   opacity: 0;
   box-shadow: var(--shadow-box);
 
@@ -102,13 +109,13 @@ body > div#root > header > section > currency-switcher > currencies-pop{
   transition-property: transform, opacity;
 
 }
-body > div#root > header > section > currency-switcher > currencies-pop.active{
+body > div#root > header > section > currency-switcher > currencies-pop-up.active{
   opacity: 1;
 
     transform: translate(-0.6em, 0px);
 
 }
-body > div#root > header > section > currency-switcher > currencies-pop > button{
+body > div#root > header > section > currency-switcher > currencies-pop-up > button{
   font-size: 1em;
   height: 45px;
   padding: 0px var(--padding);
@@ -116,10 +123,7 @@ body > div#root > header > section > currency-switcher > currencies-pop > button
   transition: var(--transition-velocity) var(--ttf) background-color;
 
 }
-body > div#root > header > section > currency-switcher > currencies-pop > button:hover{
+body > div#root > header > section > currency-switcher > currencies-pop-up > button:where(:hover, .active){
   background-color: #EEEEEE;
-
-}
-body > div#root > header > section > currency-switcher > currencies-pop > button.active{
 
 }

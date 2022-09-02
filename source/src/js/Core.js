@@ -1,5 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+
+// Globals
+import {GLOBALS} from 'js/Globals';
 
 // Components
 import Header from 'js/components/Header';
@@ -15,12 +18,8 @@ export default class Core extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      currentCurrency: "USD",
-      products: null,
-
-      isCoverShown: false,
-      isCurrencySwitcherShown: false,
-      isCartOverlayShown: false
+      currentCurrency: GLOBALS.currencies["USD"].code,
+      products: null
 
     }
 
@@ -35,7 +34,9 @@ export default class Core extends React.Component{
         />
         <main>
           <Routes>
-            <Route path="/" element={<All />} />
+            <Route path="*" element={
+              <Navigate to="/All" replace />
+            }/>
             <Route path="/all" element={<All />} />
             <Route path="/tech" element={<Tech />} />
             <Route path="/clothes" element={<Clothes />} />

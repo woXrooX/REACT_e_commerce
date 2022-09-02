@@ -7,17 +7,33 @@ import {GLOBALS} from 'js/Globals';
 import currenciesButton from 'svg/currenciesButton.svg';
 
 export default class CurrencySwitcher extends React.Component{
-  static #selectorPopUp = "body > div#root > header > section > currency-switcher > currencies-pop";
-  static #selectorCurrenciesButtonp = "body > div#root > header > section > currency-switcher > img";
+  static #selectorPopUp = "body > div#root > header > section > currency-switcher > currencies-pop-up";
+  static #selectorArrowButton = "body > div#root > header > section > currency-switcher > img";
+
+  // Avoiding DOM Build Race
+  componentDidMount(){
+    this.elementArrowButton = document.querySelector(CurrencySwitcher.#selectorArrowButton);
+    this.elementPopUp = document.querySelector(CurrencySwitcher.#selectorPopUp);
+
+  }
 
   render(){
     return(
       <currency-switcher>
         <span>{GLOBALS.currencies[this.props.getCurrentCurrency].symbol}</span>
         <img onClick={this.#toggleCurrenciesPop} src={currenciesButton} alt="Currencies Toggle Button" />
-        <currencies-pop>
-          {Object.entries(GLOBALS.currencies).map(([key, currency])=><button key={key} onClick={()=>this.#currencyButtonOnClick(currency.code)}>{currency.symbol} {currency.code}</button>)}
-        </currencies-pop>
+        <currencies-pop-up>
+          {
+            Object.entries(GLOBALS.currencies).map(([key, currency])=>
+              <button
+                key={key}
+                onClick={()=>this.#currencyButtonOnClick(currency.code)}
+                className={this.props.getCurrentCurrency === currency.code?"active":""}
+              >
+                {currency.symbol} {currency.code}
+              </button>)
+          }
+        </currencies-pop-up>
       </currency-switcher>
     );
   }
@@ -25,33 +41,48 @@ export default class CurrencySwitcher extends React.Component{
   //////////// Methods
   // Toggle Currencies Pop Up & Opening Button
   #toggleCurrenciesPop = ()=>{
-    document.querySelector(CurrencySwitcher.#selectorPopUp).classList.toggle("active");
+    this.elementPopUp.classList.toggle("active");
 
-    // Rotate Back Currencies Button
-    this.#currenciesButtonRotateBack();
+    this.#rotateArrowButton();
+
+    // Init Event Listener For Outside Click Detection
+    this.#outsideClick();
 
   }
 
-  #currencyButtonOnClick(currency){
-    // Close Currencies Pop Up
-    document.querySelector(CurrencySwitcher.#selectorPopUp).classList.remove("active");
+  // On Click Currency Button
+  #currencyButtonOnClick = (currency)=>{
+    this.#closePopUp();
+    this.#rotateArrowButton();
 
     // Set The New Currency
     // No Validation! Back End Must Validate Before Updating Database.
     this.props.setCurrentCurrency(currency);
 
-    // Rotate Back Currencies Button
-    this.#currenciesButtonRotateBack();
-
   }
 
-  // Rotate Back Currencies Button
-  #currenciesButtonRotateBack = ()=>document.querySelector(CurrencySwitcher.#selectorCurrenciesButtonp).classList.remove("active");
+  // Close Currencies Pop Up
+  #closePopUp = ()=> this.elementPopUp.classList.remove("active");
 
-  // #currencyButtonOnClick = (event)=>{
-  //   this.#close();
-  //   console.log(event.target.getAttribute("currency"));
-  //
-  // }
+  // Rotate Arrow Button
+  #rotateArrowButton = ()=> this.elementArrowButton.classList.toggle("active");
+
+  // Close Pop Up When Clicked Outside
+  #outsideClick = ()=>{
+    window.onclick = (event)=>{
+      // Check If Pop Up Is Active
+      if(!this.elementPopUp.classList.contains("active")) return;
+
+      // Arrow Button Funtionality Already Established No Need To Proceed.
+      if(event.target === this.elementArrowButton) return;
+
+      if(!this.elementPopUp.contains(event.target)){
+        this.#rotateArrowButton();
+        this.#closePopUp();
+
+      }
+
+    };
+  }
 
 }
