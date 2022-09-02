@@ -13,7 +13,10 @@ export default class Header extends React.Component{
           <Nav />
           <img src={brand} alt="Brand" />
           <section>
-            <CurrencySwitcher />
+            <CurrencySwitcher
+              setCurrentCurrency={this.props.setCurrentCurrency}
+              getCurrentCurrency={this.props.getCurrentCurrency}
+            />
             <CartOverlay />
           </section>
         </header>
