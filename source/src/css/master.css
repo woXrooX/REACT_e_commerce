@@ -75,7 +75,14 @@ body > div#root > header > section > currency-switcher{
 
 }
 body > div#root > header > section > currency-switcher > img{
-  height: 0.3em;
+  height: 0.5em;
+
+  transition:var(--transition-velocity) var(--ttf);
+  transition-property: transform;
+
+}
+body > div#root > header > section > currency-switcher > img.active{
+  transform: rotate(180deg);
 
 }
 body > div#root > header > section > currency-switcher > currencies-pop{
