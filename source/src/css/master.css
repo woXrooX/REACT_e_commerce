@@ -6,6 +6,7 @@
 
   --color-background: rgba(255, 255, 255, 1);
   --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-cover: rgba(57, 55, 72, 0.22);
   --color-nav-a: #1D1F22;
   --color-nav-a-active: #5ECE7B;
 
@@ -14,6 +15,7 @@
   --padding: 20px;
   --gap: 20px;
   --radius: 0px;
+  --motion-range: -10px;
 
   --header-height: 80px;
 
@@ -31,19 +33,26 @@ body{
 
 }
 body > div#root > header{
+  background-color: var(--color-background);
+
   height: var(--header-height);
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
 
+  position: relative;
+  z-index: var(--z-header);
+
 }
+
 body > div#root > header > nav{
   display: flex;
   flex-direction: row;
   align-items: center;
 
 }
+
 body > div#root > header > nav > a{
   color: var(--color-nav-a);
   text-transform: uppercase;
@@ -65,6 +74,7 @@ body > div#root > header > nav > a.active{
   border-block-end-color: currentcolor;
 
 }
+
 body > div#root > header > section{
   display: flex;
   flex-direction: row;
@@ -72,6 +82,7 @@ body > div#root > header > section{
   gap: var(--gap);
 
 }
+
 body > div#root > header > section > currency-switcher{
   display: flex;
   flex-direction: row;
@@ -80,7 +91,7 @@ body > div#root > header > section > currency-switcher{
 
 }
 body > div#root > header > section > currency-switcher > img{
-  height: 0.5em;
+  height: 0.4em;
 
   cursor: pointer;
 
@@ -93,6 +104,10 @@ body > div#root > header > section > currency-switcher > img.active{
 
 }
 body > div#root > header > section > currency-switcher > currencies-pop-up{
+	pointer-events: none;
+
+  background-color: var(--color-background);
+
   opacity: 0;
   box-shadow: var(--shadow-box);
 
@@ -103,16 +118,18 @@ body > div#root > header > section > currency-switcher > currencies-pop-up{
 
   position: absolute;
   top: calc(var(--header-height) - 1.5em);
-  transform: translate(-0.6em, -10px);
+  transform: translate(-0.6em, var(--motion-range));
+  z-index: var(--z-minus);
 
   transition: var(--transition-velocity) var(--ttf);
   transition-property: transform, opacity;
 
 }
 body > div#root > header > section > currency-switcher > currencies-pop-up.active{
+  pointer-events: all;
   opacity: 1;
-
-    transform: translate(-0.6em, 0px);
+  transform: translate(-0.6em, 0px);
+  z-index: var(--z-pop-ups);
 
 }
 body > div#root > header > section > currency-switcher > currencies-pop-up > button{
@@ -125,5 +142,88 @@ body > div#root > header > section > currency-switcher > currencies-pop-up > but
 }
 body > div#root > header > section > currency-switcher > currencies-pop-up > button:where(:hover, .active){
   background-color: #EEEEEE;
+
+}
+
+body > div#root > header > section > cart-overlay{}
+body > div#root > header > section > cart-overlay > span{
+  position: relative;
+
+}
+body > div#root > header > section > cart-overlay > span > img{
+  cursor: pointer;
+}
+body > div#root > header > section > cart-overlay > span > span{
+  --size: 25px;
+
+  background-color: black;
+
+  color: white;
+  font-weight: bold;
+  /* font-size: calc( 70 * var(--size) / 100); */
+
+  display: grid;
+  place-items: center;
+
+  height: var(--size);
+  width: var(--size);
+
+  border-radius: 50%;
+
+  position: absolute;
+  top: calc( -0.7 * var(--size));
+  right: calc( -0.7 * var(--size));
+
+}
+body > div#root > header > section > cart-overlay > cart-pop-up{
+  pointer-events: none;
+
+  background-color: var(--color-background);
+
+  opacity: 0;
+  overflow-y: scroll;
+
+  box-shadow: var(--shadow-box);
+
+  max-height: calc(80vh - var(--header-height));
+  padding: var(--padding);
+
+  position: absolute;
+  top: var(--header-height);
+  right: var(--header-height);
+  transform: translateY(var(--motion-range));
+  z-index: var(--z-minus);
+
+  transition: var(--transition-velocity) var(--ttf);
+  transition-property: transform, opacity;
+
+}
+body > div#root > header > section > cart-overlay > cart-pop-up.active{
+  pointer-events: all;
+  opacity: 1;
+  transform: translateY(0px);
+  z-index: var(--z-pop-ups);
+
+}
+
+body > div#root > cover-element{
+  background-color: var(--color-cover);
+  opacity: 0;
+
+  height: 100vh;
+  width: 100vw;
+
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: var(--z-minus);
+
+  transition: var(--transition-velocity) var(--ttf);
+  transition-property:opacity;
+
+}
+body > div#root > cover-element.active{
+  opacity: 1;
+  z-index: var(--z-cover);
 
 }

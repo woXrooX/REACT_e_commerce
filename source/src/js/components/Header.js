@@ -17,7 +17,9 @@ export default class Header extends React.Component{
               setCurrentCurrency={this.props.setCurrentCurrency}
               getCurrentCurrency={this.props.getCurrentCurrency}
             />
-            <CartOverlay />
+            <CartOverlay
+              getCartItemsCount={this.props.getCartItemsCount}
+            />
           </section>
         </header>
     );
