@@ -7,13 +7,18 @@ import {GLOBALS} from 'js/Globals';
 import currenciesButton from 'svg/currenciesButton.svg';
 
 export default class CurrencySwitcher extends React.Component{
+  static #selectorButton = "body > div#root > header > section > currency-switcher > img";
   static #selectorPopUp = "body > div#root > header > section > currency-switcher > currencies-pop-up";
-  static #selectorArrowButton = "body > div#root > header > section > currency-switcher > img";
 
-  // Avoiding DOM Build Race
+  #elementButton = null;
+  #elementPopUp = null;
+
   componentDidMount(){
-    this.elementArrowButton = document.querySelector(CurrencySwitcher.#selectorArrowButton);
-    this.elementPopUp = document.querySelector(CurrencySwitcher.#selectorPopUp);
+    this.#elementButton = document.querySelector(CurrencySwitcher.#selectorButton);
+    this.#elementPopUp = document.querySelector(CurrencySwitcher.#selectorPopUp);
+
+    // Init Event Listener For Outside Click Detection
+    this.#outsideClick();
 
   }
 
@@ -40,13 +45,35 @@ export default class CurrencySwitcher extends React.Component{
 
   //////////// Methods
   // Toggle Currencies Pop Up & Opening Button
-  #toggleCurrenciesPop = ()=>{
-    this.elementPopUp.classList.toggle("active");
+  #toggleCurrenciesPop = ()=> {
+    this.#elementPopUp.classList.toggle("active");
 
     this.#rotateArrowButton();
 
-    // Init Event Listener For Outside Click Detection
-    this.#outsideClick();
+  }
+
+  // Rotate Arrow Button
+  #rotateArrowButton = ()=> this.#elementButton.classList.toggle("active");
+
+  // Close Currencies Pop Up
+  #closePopUp = ()=> this.#elementPopUp.classList.remove("active");
+
+  // Close Pop Up When Clicked Outside
+  #outsideClick = ()=>{
+    window.addEventListener("click", (event)=>{
+      // Check If Pop Up Is Active
+      if(!this.#elementPopUp.classList.contains("active")) return;
+
+      // Arrow Button Funtionality Already Established No Need To Proceed.
+      if(event.target === this.#elementButton) return;
+
+      if(!this.#elementPopUp.contains(event.target)){
+        this.#rotateArrowButton();
+        this.#closePopUp();
+
+      }
+
+    });
 
   }
 
@@ -59,30 +86,6 @@ export default class CurrencySwitcher extends React.Component{
     // No Validation! Back End Must Validate Before Updating Database.
     this.props.setCurrentCurrency(currency);
 
-  }
-
-  // Close Currencies Pop Up
-  #closePopUp = ()=> this.elementPopUp.classList.remove("active");
-
-  // Rotate Arrow Button
-  #rotateArrowButton = ()=> this.elementArrowButton.classList.toggle("active");
-
-  // Close Pop Up When Clicked Outside
-  #outsideClick = ()=>{
-    window.onclick = (event)=>{
-      // Check If Pop Up Is Active
-      if(!this.elementPopUp.classList.contains("active")) return;
-
-      // Arrow Button Funtionality Already Established No Need To Proceed.
-      if(event.target === this.elementArrowButton) return;
-
-      if(!this.elementPopUp.contains(event.target)){
-        this.#rotateArrowButton();
-        this.#closePopUp();
-
-      }
-
-    };
   }
 
 }
