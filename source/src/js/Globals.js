@@ -12,5 +12,12 @@ export const GLOBALS = {
       "code": "JPY",
       "symbol": '¥'
     }
+  },
+
+  "database": {
+    "PORT": 4000,
+    "URL": "http://localhost",
+    "endPoint": "graphql"
   }
+
 };

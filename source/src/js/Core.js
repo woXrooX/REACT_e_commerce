@@ -23,10 +23,10 @@ export default class Core extends React.Component{
     // Followings Are All Mock Data!
     this.state = {
       currentCurrency: GLOBALS.currencies["USD"].code,
-      products: null,
+      cart: [],
       cartItemsCount: 12
 
-    }
+    };
 
   }
 
