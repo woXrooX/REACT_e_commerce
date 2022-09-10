@@ -227,3 +227,43 @@ body > div#root > cover-element.active{
   z-index: var(--z-cover);
 
 }
+
+body > div#root > :where(products-all, products-tech, products-clothes){
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  grid-gap: var(--gap);
+
+  padding: calc(var(--padding) * 4);
+
+}
+body > div#root > :where(products-all, products-tech, products-clothes) > :first-child{
+  grid-column: 1 / -1;
+
+}
+body > div#root > :where(products-all, products-tech, products-clothes) > product-card{
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: calc(var(--gap) / 4);
+
+  padding: var(--padding);
+
+  transition:var(--transition-velocity) var(--ttf);
+  transition-property: box-shadow;
+
+}
+body > div#root > :where(products-all, products-tech, products-clothes) > product-card:hover{
+  box-shadow: var(--shadow-box);
+
+}
+body > div#root > :where(products-all, products-tech, products-clothes) > product-card > img{
+  object-fit: contain;
+  width: 100%;
+  height: 200px;
+
+}
+body > div#root > :where(products-all, products-tech, products-clothes) > product-card > b{
+  /* Disbalance On Price Numbers Come From Font Family "Raleway" */
+  /* For Manual Design Use <sup /> */
+  /* font-family: none; */
+
+}

@@ -1,7 +1,7 @@
 // Globals
 import {GLOBALS} from 'js/Globals';
 
-export async function fetchProducts(category = "all"){
+export default async function fetchProducts(category = "all"){
   const query = `
 {category(input: { title: "${category}" }){
   products {

@@ -33,24 +33,30 @@ export default class Core extends React.Component{
   render(){
     return(
       <BrowserRouter>
+
         <Header
           setCurrentCurrency={this.#setCurrentCurrency}
           getCurrentCurrency={this.#getCurrentCurrency}
           getCartItemsCount={this.#getCartItemsCount}
         />
+
         <Cover />
-        <main>
-          <Routes>
-            <Route path="*" element={
-              <Navigate to="/All" replace />
-            }/>
-            <Route path="/all" element={<All />} />
-            <Route path="/tech" element={<Tech />} />
-            <Route path="/clothes" element={<Clothes />} />
-            <Route path="/Cart" element={<Cart />} />
-            <Route path="/Product" element={<Product />} />
-          </Routes>
-        </main>
+
+        <Routes>
+
+          <Route path="*" element={
+            <Navigate to="/all" replace />
+          }/>
+
+          <Route path="/all" element={<All getCurrentCurrency={this.#getCurrentCurrency} />} />
+          <Route path="/tech" element={<Tech getCurrentCurrency={this.#getCurrentCurrency} />} />
+          <Route path="/clothes" element={<Clothes getCurrentCurrency={this.#getCurrentCurrency} />} />
+
+          <Route path="/Cart" element={<Cart />} />
+          <Route path="/Product" element={<Product />} />
+
+        </Routes>
+
       </BrowserRouter>
     );
   }

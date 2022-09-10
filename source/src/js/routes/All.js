@@ -1,7 +1,11 @@
 import React from 'react';
 
+// Components
+import ProductCard from 'js/components/ProductCard';
+
 // Tools
-import {fetchProducts} from 'js/tools/database';
+import fetchProducts from 'js/tools/fetchProducts';
+import productCards from 'js/tools/productCards';
 
 export default class All extends React.Component{
   constructor(props){
@@ -12,20 +16,16 @@ export default class All extends React.Component{
   }
 
   async componentDidMount(){
-    // Fetching Data And Triggering Re-Render
     this.setState({products: await fetchProducts("all")});
 
   }
 
   render(){
     return(
-      <section>
-        <div>{this.state.products === null? "No Data Yet" : this.state.products[0].brand}</div>
-      </section>
+      <products-all>
+        <h1>All</h1>
+        {productCards(this.state.products, this.props.getCurrentCurrency)}
+      </products-all>
     );
   }
-
-  //////////// Methods
-  
-
 }
