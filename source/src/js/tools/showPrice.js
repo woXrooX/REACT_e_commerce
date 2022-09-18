@@ -6,7 +6,7 @@ export default function showPrice(prices, currentCurrency){
 
   // Looking For Match To Current Currency
   for(const price of prices){
-    if(price.currency.label === currentCurrency){
+    if(price.currency.label === currentCurrency.label){
       returnValue = `${price.currency.symbol}${price.amount}`;
       found = true;
       break;
@@ -22,7 +22,7 @@ export default function showPrice(prices, currentCurrency){
     <>
       {prices[0].currency.symbol}
       {prices[0].amount}
-      <span className="notAvailableCurrency">(Not Available In: {currentCurrency})</span>
+      <span className="notAvailableCurrency">(Not Available In: {currentCurrency.label})</span>
     </>;
 
   }

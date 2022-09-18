@@ -2,8 +2,10 @@ import React from 'react';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 // Globals
-import {GLOBALS} from 'js/Globals';
+// Tools
+import fetchCurrencies from 'js/tools/fetchCurrencies';
 
+// SVGs
 // Components
 import Header from 'js/components/Header';
 import Cover from 'js/components/Cover';
@@ -19,14 +21,22 @@ export default class Core extends React.Component{
   constructor(props){
     super(props);
 
-    // In Production "this.state" Will Be Changed To Real Back-End Data And Will Be Kept Alive Using Sessions.
-    // Followings Are All Mock Data!
     this.state = {
-      currentCurrency: GLOBALS.currencies["USD"].code,
+      // Initing With USD
+      currentCurrency: {
+        label: "USD",
+        symbol: "$"
+      },
+      currencies: null,
       cart: [],
       cartItemsCount: 12
 
     };
+
+  }
+
+  async componentDidMount(){
+    this.setState({currencies: await fetchCurrencies()});
 
   }
 
@@ -35,9 +45,10 @@ export default class Core extends React.Component{
       <BrowserRouter>
 
         <Header
-          setCurrentCurrency={this.#setCurrentCurrency}
           getCurrentCurrency={this.#getCurrentCurrency}
+          getCurrencies={this.#getCurrencies}
           getCartItemsCount={this.#getCartItemsCount}
+          setCurrentCurrency={this.#setCurrentCurrency}
         />
 
         <Cover />
@@ -53,7 +64,7 @@ export default class Core extends React.Component{
           <Route path="/clothes" element={<Clothes getCurrentCurrency={this.#getCurrentCurrency} />} />
 
           <Route path="/Cart" element={<Cart />} />
-          <Route path="/Product" element={<Product />} />
+          <Route path="/Product/:id" element={<Product />} />
 
         </Routes>
 
@@ -70,6 +81,8 @@ export default class Core extends React.Component{
   /// Getters
   // getCurrentCurrency = ()=> this.state.currentCurrency;
   get #getCurrentCurrency(){return this.state.currentCurrency;}
+
+  get #getCurrencies(){return this.state.currencies;}
 
   get #getCartItemsCount(){return this.state.cartItemsCount;}
 

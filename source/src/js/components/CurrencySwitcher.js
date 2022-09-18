@@ -20,25 +20,16 @@ export default class CurrencySwitcher extends React.Component{
     // Init Event Listener For Outside Click Detection
     this.#outsideClick();
 
+    console.log(this.props.getCurrencies);
+
   }
 
   render(){
     return(
       <currency-switcher>
-        <span>{GLOBALS.currencies[this.props.getCurrentCurrency].symbol}</span>
+        <span>{this.props.getCurrentCurrency.symbol}</span>
         <img onClick={this.#toggleCurrenciesPop} src={currenciesButton} alt="Currencies Toggle Button" />
-        <currencies-pop-up>
-          {
-            Object.entries(GLOBALS.currencies).map(([key, currency])=>
-              <button
-                key={key}
-                onClick={()=>this.#currencyButtonOnClick(currency.code)}
-                className={this.props.getCurrentCurrency === currency.code?"active":""}
-              >
-                {currency.symbol} {currency.code}
-              </button>)
-          }
-        </currencies-pop-up>
+        <currencies-pop-up>{this.#currencyButtons()}</currencies-pop-up>
       </currency-switcher>
     );
   }
@@ -82,9 +73,31 @@ export default class CurrencySwitcher extends React.Component{
     this.#closePopUp();
     this.#rotateArrowButton();
 
-    // Set The New Currency
+    // Set The New Currency (Only For Front-End)
     // No Validation! Back End Must Validate Before Updating Database.
     this.props.setCurrentCurrency(currency);
+
+  }
+
+  // Currency Buttons
+  #currencyButtons = ()=>{
+    if(this.props.getCurrencies == null) return;
+
+    let buttons = [];
+
+    for(const currency of this.props.getCurrencies){
+      buttons.push(
+        <button
+          key={currency.label}
+          onClick={()=>this.#currencyButtonOnClick(currency)}
+          className={this.props.getCurrentCurrency.label === currency.label?"active":""}
+        >
+          {currency.symbol} {currency.label}
+        </button>
+      );
+    }
+
+    return buttons;
 
   }
 

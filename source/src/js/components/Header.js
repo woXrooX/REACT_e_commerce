@@ -14,8 +14,9 @@ export default class Header extends React.Component{
           <img src={brand} alt="Brand" />
           <section>
             <CurrencySwitcher
-              setCurrentCurrency={this.props.setCurrentCurrency}
+              getCurrencies={this.props.getCurrencies}
               getCurrentCurrency={this.props.getCurrentCurrency}
+              setCurrentCurrency={this.props.setCurrentCurrency}
             />
             <CartOverlay
               getCartItemsCount={this.props.getCartItemsCount}
