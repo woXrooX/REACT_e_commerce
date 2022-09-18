@@ -20,8 +20,6 @@ export default class CurrencySwitcher extends React.Component{
     // Init Event Listener For Outside Click Detection
     this.#outsideClick();
 
-    console.log(this.props.getCurrencies);
-
   }
 
   render(){
