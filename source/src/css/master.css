@@ -4,10 +4,12 @@
   --z-header: 2;
   --z-pop-ups: 3;
 
+  --color-font: rgba(29, 31, 34, 1);
+  --color-font-error: rgba(155, 0, 0, 1);
   --color-background: rgba(255, 255, 255, 1);
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-cover: rgba(57, 55, 72, 0.22);
-  --color-nav-a: #1D1F22;
+  --color-nav-a: var(--color-font);
   --color-nav-a-active: #5ECE7B;
 
   --shadow-box: 0px 0px 20px -10px var(--color-shadow);
@@ -22,8 +24,10 @@
   --transition-velocity: 200ms;
   /* ttf = transition-timing-function */
   --ttf: ease-in-out;
+  --transition-default: var(--transition-velocity) var(--ttf);
 
 }
+
 
 body{
   background-color: var(--color-background);
@@ -32,6 +36,8 @@ body{
   font-family: 'Raleway';
 
 }
+
+
 body > div#root > header{
   background-color: var(--color-background);
 
@@ -206,6 +212,7 @@ body > div#root > header > section > cart-overlay > cart-pop-up.active{
 
 }
 
+
 body > div#root > cover-element{
   background-color: var(--color-cover);
   opacity: 0;
@@ -228,6 +235,7 @@ body > div#root > cover-element.active{
 
 }
 
+
 body > div#root > :where(products-all, products-tech, products-clothes){
   display: grid;
   grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
@@ -240,7 +248,8 @@ body > div#root > :where(products-all, products-tech, products-clothes) > :first
   grid-column: 1 / -1;
 
 }
-body > div#root > :where(products-all, products-tech, products-clothes) > product-card{
+
+body > div#root > :where(products-all, products-tech, products-clothes) > a{
   display: grid;
   grid-template-rows: auto;
   grid-gap: calc(var(--gap) / 4);
@@ -251,17 +260,39 @@ body > div#root > :where(products-all, products-tech, products-clothes) > produc
   transition-property: box-shadow;
 
 }
-body > div#root > :where(products-all, products-tech, products-clothes) > product-card:hover{
+body > div#root > :where(products-all, products-tech, products-clothes) > a:hover{
   box-shadow: var(--shadow-box);
 
 }
-body > div#root > :where(products-all, products-tech, products-clothes) > product-card > img{
+
+body > div#root > :where(products-all, products-tech, products-clothes) > a > div{
+  position: relative;
+}
+body > div#root > :where(products-all, products-tech, products-clothes) > a > div > img.addToCart{
+  pointer-events: none;
+  opacity: 0;
+
+  position: absolute;
+  bottom: calc(var(--padding) * -1);
+  right: var(--padding);
+
+  transition: var(--transition-default);
+  transition-property: opacity;
+
+}
+body > div#root > :where(products-all, products-tech, products-clothes) > a:hover > div > img.addToCart{
+  pointer-events: all;
+  opacity: 1;
+
+}
+body > div#root > :where(products-all, products-tech, products-clothes) > a > div > img.gallery{
   object-fit: contain;
   width: 100%;
   height: 200px;
 
 }
-body > div#root > :where(products-all, products-tech, products-clothes) > product-card > b{
+
+body > div#root > :where(products-all, products-tech, products-clothes) > a > b{
   /* Disbalance On Price Numbers Come From Font Family "Raleway" */
   /* For Manual Design Use <sup /> */
   /* font-family: none; */

@@ -7,10 +7,25 @@
 
 }
 
+a{
+  text-decoration: none;
+  color: var(--color-font);
+
+}
+
 button{
   background-color: unset;
   border: unset;
   cursor: pointer;
+
+}
+
+.notAvailableCurrency{
+  color: var(--color-font-error);
+  font-size: 0.6em;
+  font-weight: lighter;
+
+  padding-left: calc(var(--padding) / 4);
 
 }
 
@@ -19,5 +34,6 @@ button{
 @font-face{
   font-family: Raleway;
   src:url("fonts/Raleway.ttf");
+
 }
 /***************** Fonts END */
