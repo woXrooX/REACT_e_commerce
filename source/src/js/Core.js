@@ -22,7 +22,7 @@ export default class Core extends React.Component{
     super(props);
 
     this.state = {
-      // Initing With USD
+      // Initing With USD & $
       currentCurrency: {
         label: "USD",
         symbol: "$"
