@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class BalleryBig extends React.Component{
+export default class GalleryBig extends React.Component{
 
   #imageMain = null;
 
@@ -43,6 +43,6 @@ export default class BalleryBig extends React.Component{
 
   }
 
-  #setMianImage(source = null){if(source != null) this.#imageMain.src = source;}
+  #setMianImage(source = null){if(source !== null || source !== undefined) this.#imageMain.src = source;}
 
 }

@@ -60,4 +60,18 @@ button{
   src:url("fonts/Raleway.ttf");
 
 }
+
+/* Roboto Condensed */
+@font-face{
+  font-family: "Roboto Condensed";
+  src:url("fonts/RobotoCondensed.ttf");
+
+}
+
+/* Roboto */
+@font-face{
+  font-family: "Roboto";
+  src:url("fonts/Roboto.ttf");
+
+}
 /***************** Fonts END */
