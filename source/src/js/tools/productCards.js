@@ -13,7 +13,7 @@ export default function productCards(products = null, currentCurrency){
         product={product}
         getCurrentCurrency={currentCurrency}
       />
-    )
+    );
   }
 
   return cards;

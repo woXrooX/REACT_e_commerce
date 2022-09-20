@@ -1,6 +1,8 @@
 // Extract Matching Price To The Current Currency Of The Site
 
 export default function showPrice(prices, currentCurrency){
+  if(prices === undefined || prices === null) return;
+
   let found = false;
   let returnValue = "";
 

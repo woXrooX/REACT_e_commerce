@@ -1,27 +1,28 @@
 // Globals
 import {GLOBALS} from 'js/Globals';
 
-export default async function fetchProducts(category = "all"){
+export default async function fetchProduct(id){
   const query = `
-query fetchProductsByCategory{
-  category(input: { title: "${category}" }){
-    products {
-      id brand name description gallery category
+query fetchProductById {
+  product(id: "${id}"){
+    brand name description inStock gallery
 
-      attributes {
-        id name type
-        items { displayValue value id }
+    attributes{
+      id name type
 
-      }
-
-      prices {
-        currency { label symbol }
-        amount
-
-      }
+      items{id displayValue value}
 
     }
+
+    prices{
+      currency{label symbol}
+
+      amount
+
+    }
+
   }
+
 }
   `;
 
@@ -38,7 +39,7 @@ query fetchProductsByCategory{
   try{
     const response = await fetch(`${GLOBALS.database.URL}:${GLOBALS.database.PORT}/${GLOBALS.database.endPoint}`, init);
     const data = await response.json();
-    return data.data.category.products;
+    return data.data.product;
 
   }catch(error){
     console.log(error);

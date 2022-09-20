@@ -1,45 +1,31 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
+
+// SVGs
+import addToCart from 'svg/addToCart.svg';
+
+// Tools
+import showPrice from 'js/tools/showPrice';
+
+
 
 export default class ProductCard extends React.Component{
   render(){
     return(
-      <>
-        <product-card>
-          <img src={this.props.product.gallery[0]} />
-          <span className="description">{this.props.product.name}</span>
-          <b className="price">{this.#showPrice()}</b>
-        </product-card>
-      </>
+      <NavLink to={"/product/" + this.props.product.id}>
+        <div>
+          <img className="addToCart" onClick={this.#addToCart()} src={addToCart} alt="Add To Cart" />
+          <img className="gallery" src={this.props.product.gallery[0]} alt="Product" />
+        </div>
+        <span className="description">{this.props.product.name}</span>
+        <b className="price">{showPrice(this.props.product.prices, this.props.getCurrentCurrency)}</b>
+      </NavLink>
     );
   }
 
   //////////// Methods
-  #showPrice(){
-    let symbol;
-    let amount;
-    let found = false;
-
-    // Looking Match For Current Currency
-    for(const price of this.props.product.prices){
-      if(price.currency.label == this.props.getCurrentCurrency){
-        symbol = price.currency.symbol;
-        amount = price.amount;
-        found = true;
-        break;
-
-      }
-
-    }
-
-    // ? No Match For Current Currency
-    // Fallback To The First Currency In The Product Prices Array
-    if(found == false){
-      symbol = this.props.product.prices[0].currency.symbol;
-      amount = this.props.product.prices[0].amount;
-
-    }
-
-    return `${symbol}${amount}`;
+  #addToCart = ()=> (event)=>{
+    event.preventDefault();
 
   }
 
