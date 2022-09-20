@@ -9,7 +9,7 @@
 
 // Option 2: Detect & Extract URL Parametrs From The Raw URL
 // For Now I Am Sticking To This Option Till I Get Better Option OR Knowledge
-// React Handles Most Of The Buggy Parts (Like No Params etc.) So IMO Safe To Use Little Custom Methods Here
+// React Handles Most Of The Buggy Parts (For Example If No Params Provided React Will Redirect To Specified Page) So IMO Safe To Use
 // In Any Case (My Custom Solution Or Reacts Solution). Back-End Must Check Incoming Data Before Using It To Quering (More Than Only Quering) Database
 
 // (Not) Option 3: Sit In "Update Waiting Room" From "react-router-dom" Team
