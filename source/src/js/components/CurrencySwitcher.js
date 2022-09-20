@@ -1,8 +1,5 @@
 import React from 'react';
 
-// Globals
-import {GLOBALS} from 'js/Globals';
-
 // SVGs
 import currenciesButton from 'svg/currenciesButton.svg';
 

@@ -64,7 +64,7 @@ export default class Core extends React.Component{
           <Route path="/clothes" element={<Clothes getCurrentCurrency={this.#getCurrentCurrency} />} />
 
           <Route path="/Cart" element={<Cart />} />
-          <Route path="/Product/:id" element={<Product />} />
+          <Route path="/Product/:id" element={<Product getCurrentCurrency={this.#getCurrentCurrency} />} />
 
         </Routes>
 

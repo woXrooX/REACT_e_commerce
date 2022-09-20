@@ -29,6 +29,30 @@ button{
 
 }
 
+/***************** Scrollbar START */
+/* width */
+::-webkit-scrollbar{
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track{
+  background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb{
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover{
+  background: #555;
+}
+/***************** Scrollbar END */
+
+
 /***************** Fonts START */
 /* Raleway */
 @font-face{
