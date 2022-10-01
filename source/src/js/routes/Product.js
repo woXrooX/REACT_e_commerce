@@ -25,6 +25,7 @@ import showPrice from 'js/tools/showPrice';
 
 // Components
 import GalleryBig from 'js/components/GalleryBig';
+import Attributes from 'js/components/Attributes';
 
 export default class Product extends React.Component{
   constructor(props){
@@ -32,7 +33,8 @@ export default class Product extends React.Component{
 
     this.id = this.#extractIdFromURL();
     this.state = {
-      product: undefined
+      product: undefined,
+      productForCart: null
     };
 
   }
@@ -45,17 +47,30 @@ export default class Product extends React.Component{
   render(){
     return(
       <product-full>
+
         {this.state.product === null ? <Navigate to="/all" replace /> : ""}
+
         <GalleryBig gallery={this.state.product?.gallery} />
-        <section className="details">
-          <b className="brand">{this.state.product?.brand}</b>
-          <section className="name">{this.state.product?.name}</section>
-          <section className="size"></section>
-          <section className="color"></section>
-          <section className="price">{showPrice(this.state.product?.prices, this.props.getCurrentCurrency)}</section>
+
+        <product-details>
+
+          <section>
+            <b className="brand">{this.state.product?.brand}</b>
+            <div>{this.state.product?.name}</div>
+          </section>
+
+          {<Attributes attributes={this.state.product?.attributes} />}
+
+          <b className="price">PRICE:</b>
+
+          <b>{showPrice(this.state.product?.prices, this.props.getCurrentCurrency)}</b>
+
           <button className="addToCart">Add To Cart</button>
+
           <section className="description" dangerouslySetInnerHTML={{__html: this.state.product?.description}}></section>
-        </section>
+
+        </product-details>
+
       </product-full>
     );
   }

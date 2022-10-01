@@ -4,13 +4,13 @@
   --z-header: 2;
   --z-pop-ups: 3;
 
+  --color-brand: rgba(94, 206, 123, 1);
   --color-font: rgba(29, 31, 34, 1);
   --color-font-error: rgba(155, 0, 0, 1);
   --color-background: rgba(255, 255, 255, 1);
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-cover: rgba(57, 55, 72, 0.22);
   --color-nav-a: var(--color-font);
-  --color-nav-a-active: #5ECE7B;
 
   --shadow-box: 0px 0px 20px -10px var(--color-shadow);
 
@@ -69,12 +69,12 @@ body > div#root > header > nav > a{
 
 }
 body > div#root > header > nav > a:hover{
-  color: var(--color-nav-a-active);
+  color: var(--color-brand);
   font-weight: 600;
 
 }
 body > div#root > header > nav > a.active{
-  color: var(--color-nav-a-active);
+  color: var(--color-brand);
   font-weight: 600;
 
   border-block-end-color: currentcolor;
@@ -307,7 +307,7 @@ body > div#root > :where(products-all, products-tech, products-clothes) > a > b{
 
 body > div#root > product-full{
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr;
 
 
 }
@@ -318,7 +318,6 @@ body > div#root > product-full > gallery-big{
   grid-gap: var(--gap);
 
 }
-
 body > div#root > product-full > gallery-big > aside{
   max-height: 70vh;
   overflow-y: scroll;
@@ -333,13 +332,75 @@ body > div#root > product-full > gallery-big > aside > img{
   height: 100px;
   width: 100px;
   object-fit: contain;
+  cursor: pointer;
 
 }
-
 body > div#root > product-full > gallery-big > img{
   height: 100%;
   width: 100%;
   max-height: 80vh;
   object-fit: contain;
+
+}
+
+body > div#root > product-full > product-details{
+  font-size: 1.5em;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+}
+body > div#root > product-full > product-details > product-attributes{
+  display: flex;
+  flex-direction: column;
+
+}
+body > div#root > product-full > product-details > product-attributes > :where(attribute-sizes, attribute-capacities, attribute-colors){
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+
+}
+body > div#root > product-full > product-details > product-attributes > :where(attribute-sizes, attribute-capacities, attribute-colors) > button{
+  border: 1px solid black;
+  padding: var(--padding);
+
+}
+body > div#root > product-full > product-details > product-attributes > :where(attribute-sizes, attribute-capacities) > button:where(.active, :hover){
+  background-color: black;
+  color: white;
+
+}
+body > div#root > product-full > product-details > product-attributes > attribute-colors > button:where(.active, :hover){
+  box-shadow:
+    0px 0px 0px 1px white,
+    0px 0px 0px 2px var(--color-brand)
+  ;
+
+}
+body > div#root > product-full > product-details > b.price{
+  font-family: "Roboto Condensed";
+
+}
+body > div#root > product-full > product-details > button.addToCart{
+  color: white;
+  font-size: 0.8em;
+  text-align: center;
+  text-transform: uppercase;
+
+  background-color: rgba(94, 206, 123, 1);
+
+  padding: calc(var(--padding) / 2) 0px;
+  width: 100%;
+
+}
+body > div#root > product-full > product-details > button.addToCart:hover{
+  filter: brightness(90%);
+
+}
+body > div#root > product-full > product-details > section.description{
+  font-family: Roboto;
+  font-size: 0.6em;
 
 }
